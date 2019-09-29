@@ -46,12 +46,12 @@ load all in imgs
 
 collage cat1 and cat2 with c2
 
-save cat1,cat2 collage as cutecats
+save cat1,cat2 png as cutecats
 ```
 
 # Problem
 ## Environment
-holiday/ = park1.png, park2.png, park4.png, park7.png, beach1.png, beach2.png, beach3.png, cat1.png
+holiday/ = sun1.png, park1.png, park2.png, beach1.png, beach3.png, beach5.png, cat1.png
 
 ## Task
 Create a gif showing images from the beach, then images from the park. Apply a vignette to only images from the park. Blur images from the beach.
