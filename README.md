@@ -4,7 +4,13 @@ DSL for image manipulation, gif and collage creation.
 
 # Examples
 ## Environment
-imgs/ = cat1.png, cat2.png, cat3.png, dog1.png, dog2.png, dog3.png, sticker.png
+imgs/ = cat1.png, cat2.png, cat3.png, dog1.png, dog2.png, dog3.png
+
+filter_options:
+- blur
+- sharpen 
+- vignette
+- blackandwhite
 
 collage_templates:
 - c2 (creates a collage with 2 photos)
@@ -25,23 +31,22 @@ save all png
 ```
 load all in imgs
 
-filter cat with blur
-filter dog with sharpen
+filter cat1 with blur
+filter dog1 with sharpen
 
-sequence cat
-sequence dog
-overlay sticker bottom-right
+sequence cat1
+sequence dog1
 
-save all gif 2s
+save cat1,dog1 gif as catdog
 ```
 
 ## Example 3
 ```
 load all in imgs
 
-collage cat1 and cat2 as c2
+collage cat1 and cat2 with c2
 
-save c2
+save cat1,cat2 collage as cutecats
 ```
 
 # Problem
