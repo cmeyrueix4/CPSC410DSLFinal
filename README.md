@@ -1,10 +1,6 @@
 # CPSC410DSL
 DSL for image manipulation, gif and collage creation. 
 
-# Environment Setup
-Make sure you have `OpenCV` installed from [here](https://opencv.org/releases/).
-The Java project uses gradle as it's build system.
-
 
 # Examples
 ## Environment
@@ -16,41 +12,35 @@ filter_options:
 - vignette
 - blackandwhite
 
-collage_templates:
-- c2 (creates a collage with 2 photos)
-- c3 (creates a collage with 3 photos)
-- c4 (creates a collage with 4 photos)
-
 
 ## Example 1
 ```
-load all in imgs
+load from imgs: all
 
-filter all with vignette
+filter vignette: all
 
-save all png
+save all
 ```
 
 ## Example 2
 ```
-load all in imgs
+load from imgs: all
 
-filter cat1 with blur
-filter dog1 with sharpen
+filter blur: cat1
+filter sharpen: dog1
 
-sequence cat1
-sequence dog1
+create gif catdog: cat1, dog1
 
-save cat1,dog1 gif as catdog
+save catdog
 ```
 
 ## Example 3
 ```
-load all in imgs
+load from imgs: all
 
-collage cat1 and cat2 with c2
+create collage cutecats: cat1, cat2, cat3
 
-save cat1,cat2 png as cutecats
+save cutecats
 ```
 
 # Problem
