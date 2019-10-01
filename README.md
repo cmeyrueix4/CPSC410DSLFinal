@@ -1,6 +1,10 @@
 # CPSC410DSL
 DSL for image manipulation, gif and collage creation. 
 
+# Environment Setup
+Make sure you have `OpenCV` installed from [here](https://opencv.org/releases/).
+The Java project uses gradle as it's build system.
+
 
 # Examples
 ## Environment
