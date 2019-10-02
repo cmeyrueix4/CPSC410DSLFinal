@@ -1,0 +1,10 @@
+load all in imgs
+
+filter park with vignette
+
+filter bench with blur
+
+sequence bench
+sequence park
+
+save bench,park gif as benchpark

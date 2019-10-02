@@ -1,0 +1,9 @@
+
+load from holiday: all
+
+filter blur: beach1, beach3, beach5
+filter vignette: park1, park2
+
+create gif beachpark: beach1, beach3, beach5, park1, park2
+
+save: beachpark, beach1
