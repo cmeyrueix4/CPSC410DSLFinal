@@ -29,9 +29,6 @@ public class FilterTest {
         Mat input = new Mat(4, 4, CvType.CV_8U);
         input.put(0, 0, SMALL_NOISE);
 
-        Mat expected = new Mat(4, 4, CvType.CV_8U);
-        expected.put(0, 0, ZEROS);
-
         Mat output = b.process(input);
 
         Assert.assertNotEquals(output, input);
@@ -40,5 +37,29 @@ public class FilterTest {
         byte[] pxOutput = new byte[16];
         output.get(0, 0, pxOutput);
         Assert.assertArrayEquals(ZEROS, pxOutput);
+    }
+
+    @Test
+    public void testSharp() {
+        Filter s = new Sharpen();
+
+        Mat input = new Mat(4, 4, CvType.CV_8U);
+        input.put(0, 0, SMALL_NOISE);
+
+        Mat output = s.process(input);
+
+        Assert.assertNotEquals(output, input);
+
+        // Compare pixel values
+        byte[] pxOutput = new byte[16];
+        output.get(0, 0, pxOutput);
+        byte[] expected = new byte[]{
+                0, 0, 0, 0,
+                0, 2, 0, 0,
+                0, 0, 0, 2,
+                0, 0, 0, 0};
+        Assert.assertArrayEquals(expected, pxOutput);
+
+
     }
 }
