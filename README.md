@@ -29,7 +29,7 @@ load from imgs: all
 filter blur: cat1
 filter sharpen: dog1
 
-create gif catdog: cat1, dog1
+gif create catdog: cat1, dog1
 
 save catdog
 ```
@@ -38,7 +38,7 @@ save catdog
 ```
 load from imgs: all
 
-create collage cutecats: cat1, cat2, cat3
+collage create cutecats: cat1, cat2, cat3
 
 save cutecats
 ```

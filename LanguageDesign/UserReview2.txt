@@ -1,0 +1,16 @@
+load all in imgs
+
+filter beach1 with blur
+filter beach3 with blur
+filter beach5 with blur
+
+filter park1 with vignette
+filter park2 with vignette
+
+sequence beach1
+sequence beach3
+sequence beach5
+sequence park1
+sequence park2
+
+save beach1,beach3,beach5,park1,park2 gif as beachparks
