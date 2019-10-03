@@ -7,4 +7,9 @@ public class Vignette implements Filter {
     public Mat process(Mat inputImage) {
         return inputImage;
     }
+
+    @Override
+    public boolean setParameters(String... args) {
+        return false;
+    }
 }
