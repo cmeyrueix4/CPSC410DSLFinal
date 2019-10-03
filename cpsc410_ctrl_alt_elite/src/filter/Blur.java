@@ -1,4 +1,4 @@
-package language.filter;
+package filter;
 
 import org.opencv.core.Mat;
 
