@@ -1,5 +1,5 @@
 load from directory : image13 image2 end
-filter vignette: image 13 image2 end
+filter vignette : image13 image2 end
 gif create makevideo : image13 image2 end
 collage create makecombined : image13 image2 end
-save makevideo makecombined end
+save : makevideo makecombined end
