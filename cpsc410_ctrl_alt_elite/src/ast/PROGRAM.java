@@ -11,7 +11,7 @@ public class PROGRAM extends Node {
     @Override
     public void parse() {
         tokenizer.getAndCheckNext("load");
-        loadS = new LOAD();
+        STATEMENT loadS = new LOAD();
         loadS.parse();
         statements.add(loadS);
         while(!tokenizer.checkToken("save")){
@@ -28,7 +28,7 @@ public class PROGRAM extends Node {
             s.parse();
             statements.add(s);
         }
-        saveS = new SAVE();
+        STATEMENT saveS = new SAVE();
         saveS.parse();
         statements.add(saveS);
     }

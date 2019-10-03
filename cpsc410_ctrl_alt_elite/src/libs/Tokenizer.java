@@ -52,14 +52,15 @@ public class Tokenizer {
     private void spaceKillingTokenize(){
         String tokenizedProgram = program;
         tokenizedProgram = tokenizedProgram.replace("\n","");
-        tokenizedProgram = tokenizedProgram.replaceAll("([0-9]+)","_$1_");
+        tokenizedProgram = tokenizedProgram.replace("\r","");
+        tokenizedProgram = tokenizedProgram.replaceAll("([0-9]+)","$1_");
         System.out.println(program);
 
         for (String s : literals){
             tokenizedProgram = tokenizedProgram.replace(s,"_"+s+"_");
             System.out.println(tokenizedProgram);
         }
-        tokenizedProgram = tokenizedProgram.replaceAll("[ ]+","");
+        tokenizedProgram = tokenizedProgram.replaceAll("([ ]+)","");
         System.out.println(tokenizedProgram);
         String [] temparray=tokenizedProgram.split("[_]+");
         tokens = new String[temparray.length-1];
