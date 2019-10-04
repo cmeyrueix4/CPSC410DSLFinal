@@ -17,11 +17,13 @@ public class SAVE extends STATEMENT{
             names.add(name);
         }
         else {
-            while(!tokenizer.checkToken("end")){
-                name = tokenizer.getNext();
-                names.add(name);
+            String first = tokenizer.getNext();
+            names.add(first);
+            while (tokenizer.checkToken(",")) {
+                tokenizer.getAndCheckNext(",");
+                String photo = tokenizer.getNext();
+                names.add(photo);
             }
-            tokenizer.getAndCheckNext("end");
         }
 
     }

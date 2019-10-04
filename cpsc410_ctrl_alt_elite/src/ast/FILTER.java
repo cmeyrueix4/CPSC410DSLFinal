@@ -19,11 +19,13 @@ public class FILTER extends STATEMENT{
             photos.add(photo);
         }
         else {
-            while(!tokenizer.checkToken("end")){
-                photo = tokenizer.getNext();
+            String first = tokenizer.getNext();
+            photos.add(first);
+            while (tokenizer.checkToken(",")) {
+                tokenizer.getAndCheckNext(",");
+                String photo = tokenizer.getNext();
                 photos.add(photo);
             }
-            tokenizer.getAndCheckNext("end");
         }
 
 
