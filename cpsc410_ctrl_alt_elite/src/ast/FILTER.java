@@ -40,12 +40,15 @@ public class FILTER extends STATEMENT {
         if (tokenizer.checkToken("all")) {
             photo = tokenizer.getNext();
             photos.add(photo);
-        } else {
-            while (!tokenizer.checkToken("end")) {
+        }
+        else {
+            String first = tokenizer.getNext();
+            photos.add(first);
+            while (tokenizer.checkToken(",")) {
+                tokenizer.getAndCheckNext(",");
                 photo = tokenizer.getNext();
                 photos.add(photo);
             }
-            tokenizer.getAndCheckNext("end");
         }
 
 

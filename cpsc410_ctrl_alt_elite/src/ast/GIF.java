@@ -23,11 +23,13 @@ public class GIF extends STATEMENT{
             photos.add(all);
         }
         else {
-            while (!tokenizer.checkToken("end")) {
+            String first = tokenizer.getNext();
+            photos.add(first);
+            while (tokenizer.checkToken(",")) {
+                tokenizer.getAndCheckNext(",");
                 String photo = tokenizer.getNext();
                 photos.add(photo);
             }
-            tokenizer.getAndCheckNext("end");
         }
 
     }
