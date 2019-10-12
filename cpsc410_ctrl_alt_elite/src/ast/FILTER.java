@@ -1,8 +1,16 @@
 package ast;
 
 import filter.*;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfByte;
+import org.opencv.imgcodecs.Imgcodecs;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,10 +64,27 @@ public class FILTER extends STATEMENT {
 
     @Override
     public void evaluate() {
+        // Convert from bufferedimage to mat
+        BufferedImage bi = null; // TODO
+        Mat img = new Mat(bi.getHeight(), bi.getWidth(), CvType.CV_8UC3);
+        byte[] data = ((DataBufferByte) bi.getRaster().getDataBuffer()).getData();
+        img.put(0, 0, data);
+
+        Mat ret = null;
         for (ImageFilters f : ImageFilters.values()) {
             if (filterOption.equals(f.tokenName)) {
-                Mat ret = f.filter.process(null); // TODO
+                ret = f.filter.process(img);
             }
+        }
+
+        // Convert back to bufferedImage
+        BufferedImage output = null;
+        MatOfByte mob=new MatOfByte();
+        Imgcodecs.imencode(".jpg", ret, mob);
+        try {
+            output = ImageIO.read(new ByteArrayInputStream(mob.toArray()));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
