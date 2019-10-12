@@ -82,7 +82,6 @@ public class LOAD extends STATEMENT{
     @Override
     public void nameCheck() {
         for (String photo: photos) {
-            photo = dir + "/" + photo + ".jpg";
             Main.variables.put(photo, "");
         }
     }

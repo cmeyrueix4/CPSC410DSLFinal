@@ -1,5 +1,7 @@
 package ast;
 
+import mainrun.Main;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -93,6 +95,13 @@ public class COLLAGE extends STATEMENT{
 
     @Override
     public void nameCheck() {
+        for (String s: photos) {
+            if(!Main.variables.containsKey(s)){
+                System.exit(0);
+            }
+        }
+
+        Main.variables.put(name, "");
 
     }
 
