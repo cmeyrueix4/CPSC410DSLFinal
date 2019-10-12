@@ -3,18 +3,17 @@ package mainrun;
 import ast.PROGRAM;
 import libs.Node;
 import libs.Tokenizer;
+import org.opencv.core.Core;
 
 import java.util.Arrays;
 import java.util.List;
 
-//import org.opencv.core.Core;
-
 public class Main {
 
-//    static {
-//        // Loads the OpenCV Library
-//        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-//    }
+    static {
+        // Loads the OpenCV Library
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    }
 
     public static void main(String[] args) {
 //        Main.class.getResource("input.txt");
