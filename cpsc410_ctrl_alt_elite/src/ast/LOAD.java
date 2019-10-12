@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LOAD extends STATEMENT{
-    String dir;
+    String dir; 
     List<String> photos = new ArrayList<>();
 
     @Override
@@ -29,5 +29,9 @@ public class LOAD extends STATEMENT{
     @Override
     public void evaluate() {
 
+    }
+
+    public String getDir(){
+        return this.dir;
     }
 }
