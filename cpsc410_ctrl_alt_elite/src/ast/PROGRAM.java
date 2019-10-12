@@ -23,10 +23,10 @@ public class PROGRAM extends Node {
                 s = new FILTER();
             }
             else if (tokenizer.checkToken("gif")){
-                s = new GIF();
+                s = new GIF(loadS);
             }
             else if (tokenizer.checkToken("collage")){
-                s = new COLLAGE();
+                s = new COLLAGE(loadS);
             }
             s.parse();
             statements.add(s);

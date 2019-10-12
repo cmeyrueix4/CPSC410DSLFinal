@@ -15,6 +15,11 @@ import java.util.List;
 public class GIF extends STATEMENT{
     String name;
     List<String> photos = new ArrayList<>();
+    LOAD loadObject;
+
+    public GIF(STATEMENT load){
+        this.loadObject = (LOAD) load;
+    }
     
 
     @Override

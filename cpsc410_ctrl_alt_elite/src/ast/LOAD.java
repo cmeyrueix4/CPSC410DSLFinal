@@ -38,12 +38,7 @@ public class LOAD extends STATEMENT{
         System.out.println("PRINTING THE LIST OF FILES");
         for (File f: listOfFiles) {
             System.out.println(f);
-
         }
-
-
-
-
     }
 
     public String getDir(){

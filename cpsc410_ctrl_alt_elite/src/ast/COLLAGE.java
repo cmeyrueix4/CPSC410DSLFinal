@@ -11,6 +11,12 @@ import java.util.ArrayList;
 public class COLLAGE extends STATEMENT{
     String name;
     ArrayList<String> photos = new ArrayList<>();
+    LOAD loadObject;
+
+    public COLLAGE(STATEMENT load){
+        this.loadObject = (LOAD) load;
+    }
+
 
     @Override
     public void parse() {
