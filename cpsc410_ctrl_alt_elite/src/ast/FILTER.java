@@ -1,30 +1,30 @@
 package ast;
 
-import filter.Blur;
-import filter.Filter;
-import filter.Sharpen;
-import filter.Vignette;
-import org.opencv.core.Mat;
+//import filter.Blur;
+//import filter.Filter;
+//import filter.Sharpen;
+//import filter.Vignette;
+//import org.opencv.core.Mat;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FILTER extends STATEMENT {
-
-    private enum ImageFilters {
-        BLUR("blur", new Blur()),
-        SHARPEN("sharpen", new Sharpen()),
-        VIGNETTE("vignette", new Vignette());
-
-        private final String tokenName;
-        private final Filter filter;
-
-        ImageFilters(String tokenName, Filter filter) {
-            this.tokenName = tokenName;
-            this.filter = filter;
-        }
-
-    }
+//
+//    private enum ImageFilters {
+//        BLUR("blur", new Blur()),
+//        SHARPEN("sharpen", new Sharpen()),
+//        VIGNETTE("vignette", new Vignette());
+//
+//        private final String tokenName;
+//        private final Filter filter;
+//
+//        ImageFilters(String tokenName, Filter filter) {
+//            this.tokenName = tokenName;
+//            this.filter = filter;
+//        }
+//
+//    }
 
     String filterOption;
     List<String> photos = new ArrayList<>();
@@ -56,10 +56,10 @@ public class FILTER extends STATEMENT {
 
     @Override
     public void evaluate() {
-        for (ImageFilters f : ImageFilters.values()) {
-            if (filterOption.equals(f.tokenName)) {
-                Mat ret = f.filter.process(null); // TODO
-            }
-        }
+//        for (ImageFilters f : ImageFilters.values()) {
+//            if (filterOption.equals(f.tokenName)) {
+//                Mat ret = f.filter.process(null); // TODO
+//            }
+//        }
     }
 }
