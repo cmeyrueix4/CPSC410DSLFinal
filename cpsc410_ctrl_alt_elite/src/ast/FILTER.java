@@ -1,6 +1,9 @@
 package ast;
 
-import filter.*;
+import filter.Blur;
+import filter.Filter;
+import filter.Sharpen;
+import filter.Vignette;
 import org.opencv.core.Mat;
 
 import java.util.ArrayList;
@@ -11,10 +14,7 @@ public class FILTER extends STATEMENT {
     private enum ImageFilters {
         BLUR("blur", new Blur()),
         SHARPEN("sharpen", new Sharpen()),
-        CONTRAST("contrast", new Contrast()),
-        DARKEN("darken", new Darken()),
-        BRIGHTEN("brighten", new Brighten()),
-        INVERT("invert", new Invert());
+        VIGNETTE("vignette", new Vignette());
 
         private final String tokenName;
         private final Filter filter;
@@ -34,7 +34,7 @@ public class FILTER extends STATEMENT {
         String photo;
 
         tokenizer.getAndCheckNext("filter");
-        filterOption = tokenizer.getNext().toLowerCase();
+        filterOption = tokenizer.getNext();
 
         tokenizer.getAndCheckNext(":");
         if (tokenizer.checkToken("all")) {

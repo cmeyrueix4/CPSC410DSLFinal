@@ -10,8 +10,8 @@ public class Blur implements Filter {
     private double sigmaX;
 
     public Blur() {
-        kernelSize = new Size(7, 7);
-        sigmaX = 3;
+        kernelSize = new Size(3, 3);
+        sigmaX = 1;
     }
 
     /**
