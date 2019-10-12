@@ -35,7 +35,9 @@ public class PROGRAM extends Node {
 
     @Override
     public void evaluate() {
-
+        for (STATEMENT s : statements){
+            s.evaluate();
+        }
     }
 
 
