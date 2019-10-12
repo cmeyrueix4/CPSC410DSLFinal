@@ -1,11 +1,16 @@
 package ast;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class COLLAGE extends STATEMENT{
     String name;
-    List<String> photos = new ArrayList<>();
+    ArrayList<String> photos = new ArrayList<>();
 
     @Override
     public void parse() {
@@ -33,17 +38,17 @@ public class COLLAGE extends STATEMENT{
 
     @Override
     public void evaluate() {
-        if (photos.length != 5){
+        if (photos.size() != 5){
         try {
-            BufferedImage img1 = ImageIO.read(new File(photos[0]));
-            BufferedImage joinedImg = ImageIO.read(new File(photos[0]));
-            for (int k = 1; k < photos.length - 1; k++){
-                BufferedImage img2 = ImageIO.read(new File(photos[k]));
+            BufferedImage img1 = ImageIO.read(new File(photos.get(0)));
+            BufferedImage joinedImg = ImageIO.read(new File(photos.get(0)));
+            for (int k = 1; k < photos.size() - 1; k++){
+                BufferedImage img2 = ImageIO.read(new File(photos.get(k)));
                 joinedImg = joinBufferedImage(img1,img2);
                 img1 = joinedImg;
             }
             //BufferedImage img2=ImageIO.read(new File(args[1]));
-            boolean success = ImageIO.write(joinedImg, "jpg", new File(photos[photos.length - 1]));
+            boolean success = ImageIO.write(joinedImg, "jpg", new File(photos.get(photos.size() - 1)));
           //  boolean success = ImageIO.write(joinedImg, "jpg", new File(filename+"joined.jpg"));
             
            // System.out.println("saved success? "+success);
@@ -53,13 +58,13 @@ public class COLLAGE extends STATEMENT{
     }
         else {
             try {
-            BufferedImage topLeftCornerImage = ImageIO.read(new File(photos[0])); 
-            BufferedImage topRightCornerImage = ImageIO.read(new File(photos[1]));
+            BufferedImage topLeftCornerImage = ImageIO.read(new File(photos.get(0)));
+            BufferedImage topRightCornerImage = ImageIO.read(new File(photos.get(1)));
             BufferedImage topRowPortionOfCollage = 
             joinBufferedImage(topLeftCornerImage, topRightCornerImage);
    
-            BufferedImage bottomLeftCornerImage = ImageIO.read(new File(photos[2]));
-            BufferedImage bottomRightCornerImage = ImageIO.read(new File(photos[3]));
+            BufferedImage bottomLeftCornerImage = ImageIO.read(new File(photos.get(2)));
+            BufferedImage bottomRightCornerImage = ImageIO.read(new File(photos.get(3)));
             BufferedImage bottomRowPortionOfCollage = 
             joinBufferedImage(bottomLeftCornerImage, bottomRightCornerImage);
 
@@ -72,7 +77,7 @@ public class COLLAGE extends STATEMENT{
                 g.dispose();
 
             display(topRowPortionOfCollage);
-            ImageIO.write(topRowPortionOfCollage, "jpeg", new File(photos[4]));
+            ImageIO.write(topRowPortionOfCollage, "jpeg", new File(photos.get(4)));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

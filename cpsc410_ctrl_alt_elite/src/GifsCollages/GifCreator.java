@@ -1,3 +1,5 @@
+package GifsCollages;
+
 import javax.imageio.*;
 import javax.imageio.metadata.*;
 import javax.imageio.stream.*;
