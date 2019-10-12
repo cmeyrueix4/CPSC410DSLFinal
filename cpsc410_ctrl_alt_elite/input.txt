@@ -7,8 +7,3 @@ save: makevideo, makecombined end
 
 
 
-load from directory: image13, image2 end
-filter vignette: image13, image2 end
-gif create makevideo: image13, image2 end
-collage create makecombined: image, image2 end
-save: makevideo,  end
