@@ -32,4 +32,9 @@ public class SAVE extends STATEMENT{
     public void evaluate() {
 
     }
+
+    @Override
+    public void nameCheck() {
+
+    }
 }

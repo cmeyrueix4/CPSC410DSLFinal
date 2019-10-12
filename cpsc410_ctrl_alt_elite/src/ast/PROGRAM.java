@@ -43,5 +43,11 @@ public class PROGRAM extends Node {
         }
     }
 
+    public void nameCheck(){
+        for (STATEMENT s : statements){
+            s.nameCheck();
+        }
+    }
+
 
 }

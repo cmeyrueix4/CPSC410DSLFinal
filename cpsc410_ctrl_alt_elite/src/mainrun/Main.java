@@ -5,9 +5,12 @@ import libs.Node;
 import libs.Tokenizer;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
+    public static Map<String, Object> variables = new HashMap<>();
 
 //    static {
 //        // Loads the OpenCV Library

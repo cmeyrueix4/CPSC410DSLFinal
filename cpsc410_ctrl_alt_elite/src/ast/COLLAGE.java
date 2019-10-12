@@ -91,6 +91,11 @@ public class COLLAGE extends STATEMENT{
     }
     }
 
+    @Override
+    public void nameCheck() {
+
+    }
+
     /* This method does what the name says: it joins two images together. The only problem when joining 
     *  two images is that one image might be way bigger than the other, so the method works as follows:
     *  We come up with an offset, in this case we'll use 5. 

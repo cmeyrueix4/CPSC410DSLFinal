@@ -62,4 +62,9 @@ public class FILTER extends STATEMENT {
 //            }
 //        }
     }
+
+    @Override
+    public void nameCheck() {
+
+    }
 }

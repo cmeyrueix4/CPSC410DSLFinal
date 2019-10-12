@@ -95,4 +95,9 @@ public class GIF extends STATEMENT{
         }
     }
 
+    @Override
+    public void nameCheck() {
+
+    }
+
 }

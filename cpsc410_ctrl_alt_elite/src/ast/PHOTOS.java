@@ -11,4 +11,9 @@ public class PHOTOS extends STATEMENT{
     public void evaluate() {
 
     }
+
+    @Override
+    public void nameCheck() {
+
+    }
 }
