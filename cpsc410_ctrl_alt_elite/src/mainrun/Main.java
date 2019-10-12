@@ -23,6 +23,7 @@ public class Main {
 //        Tokenizer.makeTokenizer(String.valueOf(Main.class.getResource("../../input.txt")), literals);
 //        Tokenizer.makeTokenizer("/Users/ceylin/Documents/UBC/CPSC/410/CPSC410DSL/cpsc410_ctrl_alt_elite/input.txt",literals);
 //        Tokenizer.makeTokenizer("C:\\Users\\Cyrielle\\IdeaProjects\\CPSC410DSLV2\\cpsc410_ctrl_alt_elite\\input.txt",literals);
+//        Node.setWriter("C:\\Users\\HP USER\\Desktop\\CPSC410DSL\\cpsc410_ctrl_alt_elite\\gifOutput");
         Node program = new PROGRAM();
         program.parse();
         program.evaluate();
