@@ -59,19 +59,16 @@ public class GIF extends STATEMENT{
            System.out.println(String.format("Trying to use %s", photo));
            System.out.println(Arrays.toString(Main.variables.keySet().toArray()));
            System.out.println(Main.variables.get(photo).toString());
+
            if (Main.variables.get(photo) == "") {
                throw new RuntimeException("Tried to load a file that does not exist!");
            }
+
            BufferedImage nextImage = (BufferedImage) Main.variables.get(photo);
            imagesToMakeGifWith.add(nextImage);
-           //File nextPhotoFile = new File(photos.get(k));
-           //String pathNameOfNextPhoto = nextPhotoFile.getAbsoluteFile().getParent();
-           // String fullPathNameOfNextPhoto = loadObject.getDir(); + "\\" + photos.get(k);
-           // BufferedImage secondImage = ImageIO.read(new File(fullPathNameOfNextPhoto));
-           //writer.writeToSequence(secondImage);
+
+           Main.variables.put(name, imagesToMakeGifWith);
        }
-            //writer.close();
-            //output.close();
     }
 
 

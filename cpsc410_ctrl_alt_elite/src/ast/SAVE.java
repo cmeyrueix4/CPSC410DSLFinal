@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SAVE extends STATEMENT {
+    public static final int TOTAL_GIF_LENGTH = 2000;
     String name;
     List<String> names = new ArrayList<>();
 
@@ -38,7 +39,8 @@ public class SAVE extends STATEMENT {
 
     @Override
     public void evaluate() {
-        for (String n: names) {
+        for (String n : names) {
+            System.out.println(String.format("Trying to save %s", n));
             if (Main.variables.get(n) instanceof List) {
                 // Create a gif
                 try {
@@ -49,7 +51,9 @@ public class SAVE extends STATEMENT {
             } else {
                 BufferedImage img = (BufferedImage) Main.variables.get(n);
                 try {
+                    File target = new File("output_" + n);
                     ImageIO.write(img, "jpg", new File("output_" + n));
+                    System.out.println(String.format("Image saved to %s", target.getAbsolutePath()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -68,35 +72,25 @@ public class SAVE extends STATEMENT {
     }
 
     private void saveGif(String listName) throws IOException {
+        System.out.println("Creating GIF");
         List<BufferedImage> photos = null;
         try {
             //noinspection unchecked
             photos = (List<BufferedImage>) Main.variables.get(listName);
-            /* Running a for loop through all the photos we'd like to make a gif of. The steps to do this
-             *  are the same as the steps done to work with the first photo of the gif.
-             */
         } catch (ClassCastException ignored) {
             System.err.println("Tried to create a gif from a not gif variable!");
         }
 
+        ImageOutputStream output = new FileImageOutputStream(new File(listName + ".gif"));
 
-        // Setting the name of the output file that will become the gif
-        ImageOutputStream output = null;
-
-        output = new FileImageOutputStream(new File
-                ("C:\\Users\\HP USER\\Desktop\\CPSC410DSL\\cpsc410_ctrl_alt_elite\\" + name));
-
-
-        // creating the actual GifCreator object that will make the gif
         GifCreator writer = new GifCreator(output,
                 photos.get(0).getType(),
-                400,
+                TOTAL_GIF_LENGTH / photos.size(),
                 true);
 
         for (BufferedImage photo : photos) {
             writer.writeToSequence(photo);
         }
-
         writer.close();
         output.close();
     }
