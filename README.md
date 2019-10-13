@@ -9,8 +9,10 @@ imgs/ = cat1.png, cat2.png, cat3.png, dog1.png, dog2.png, dog3.png
 filter_options:
 - blur
 - sharpen 
-- vignette
-- blackandwhite
+- brighten
+- darken
+- invert
+- saturate
 
 
 ## Example 1
@@ -45,9 +47,9 @@ save cutecats
 
 # Problem
 ## Environment
-holiday/ = sun1.png, park1.png, park2.png, beach1.png, beach3.png, beach5.png, cat1.png
+imgs/ = sun1.png, park1.png, park2.png, beach1.png, beach3.png, beach5.png, cat1.png
 
 ## Task
-Create a gif showing images from the beach, then images from the park. Apply a vignette to only images from the park. Blur images from the beach.
+Create a gif showing images from the beach, then images from the park. Apply a brighten to only images from the park. Darken images from the beach.
 
 
