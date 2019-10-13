@@ -58,7 +58,7 @@ public class COLLAGE extends STATEMENT{
                 joinedImg = joinBufferedImage(img1,img2);
                 img1 = joinedImg;
             }
-            values.put(name, img1);
+            Main.variables.put(name, img1);
             //BufferedImage img2=ImageIO.read(new File(args[1]));
             //boolean success = ImageIO.write(joinedImg, "jpg", new File(photos.get(photos.size() - 1)));
           //  boolean success = ImageIO.write(joinedImg, "jpg", new File(filename+"joined.jpg"));
@@ -76,7 +76,7 @@ public class COLLAGE extends STATEMENT{
             String bottomLeftCornerImagePathName = loadObject.getDir() + "\\" + photos.get(2);
             String bottomRightCornerImagePathName = loadObject.getDir() + "\\" + photos.get(3);
             
-            BufferedImage topLeftCornerImage = ImageIO.read(new File(topLeftCornerImage));
+            BufferedImage topLeftCornerImage = ImageIO.read(new File(topLeftCornerImagePathName));
             BufferedImage topRightCornerImage = ImageIO.read(new File(topRightCornerImagePathName));
             BufferedImage topRowPortionOfCollage = 
             joinBufferedImage(topLeftCornerImage, topRightCornerImage);
@@ -89,12 +89,13 @@ public class COLLAGE extends STATEMENT{
             Graphics2D g = topRowPortionOfCollage.createGraphics();
             g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
             
-            g.drawImage(bottomRowPortionOfCollage, (topRowPortionOfCollage.getWidth() - 
+            g.drawImage(bottomRowPortionOfCollage, (topRowPortionOfCollage.getWidth() -
                 bottomRowPortionOfCollage.getWidth()) / 2,
                 (topRowPortionOfCollage.getHeight() - bottomRowPortionOfCollage.getHeight()) / 2, null);
                 g.dispose();
 
-            values.put(name, display(topRowPortionOfCollage));
+            Main.variables.put(name, bottomRowPortionOfCollage);
+            display(bottomRowPortionOfCollage);
 
             //ImageIO.write(topRowPortionOfCollage, "jpeg", new File(photos.get(4)));
         } catch (IOException e) {

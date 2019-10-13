@@ -1,15 +1,10 @@
 package ast;
 
-import GifsCollages.GifCreator;
 import mainrun.Main;
 
-import javax.imageio.ImageIO;
-import javax.imageio.stream.FileImageOutputStream;
-import javax.imageio.stream.ImageOutputStream;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -17,6 +12,8 @@ public class GIF extends STATEMENT{
     String name;
     List<String> photos = new ArrayList<>();
     LOAD loadObject;
+
+    private List<BufferedImage> imagesToMakeGifWith = new ArrayList<>();
 
     public GIF(STATEMENT load){
         this.loadObject = (LOAD) load;
@@ -58,15 +55,21 @@ public class GIF extends STATEMENT{
 
        // File firstPhotoFile = new File(photos.get(0));
 
-            for (int k = 0; k < photos.size(); k++) {
-                BufferedImage nextImage = (BufferedImage)variables.get(photos.get(k));
-                imagesToMakeGifWith.add(nextImage);
-                //File nextPhotoFile = new File(photos.get(k));
-                //String pathNameOfNextPhoto = nextPhotoFile.getAbsoluteFile().getParent();
-               // String fullPathNameOfNextPhoto = loadObject.getDir(); + "\\" + photos.get(k);
-               // BufferedImage secondImage = ImageIO.read(new File(fullPathNameOfNextPhoto));
-                //writer.writeToSequence(secondImage);
-            }
+       for (String photo : photos) {
+           System.out.println(String.format("Trying to use %s", photo));
+           System.out.println(Arrays.toString(Main.variables.keySet().toArray()));
+           System.out.println(Main.variables.get(photo).toString());
+           if (Main.variables.get(photo) == "") {
+               throw new RuntimeException("Tried to load a file that does not exist!");
+           }
+           BufferedImage nextImage = (BufferedImage) Main.variables.get(photo);
+           imagesToMakeGifWith.add(nextImage);
+           //File nextPhotoFile = new File(photos.get(k));
+           //String pathNameOfNextPhoto = nextPhotoFile.getAbsoluteFile().getParent();
+           // String fullPathNameOfNextPhoto = loadObject.getDir(); + "\\" + photos.get(k);
+           // BufferedImage secondImage = ImageIO.read(new File(fullPathNameOfNextPhoto));
+           //writer.writeToSequence(secondImage);
+       }
             //writer.close();
             //output.close();
     }
