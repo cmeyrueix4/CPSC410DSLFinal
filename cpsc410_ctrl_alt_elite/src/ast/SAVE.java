@@ -52,7 +52,7 @@ public class SAVE extends STATEMENT {
                 BufferedImage img = (BufferedImage) Main.variables.get(n);
                 try {
                     File target = new File("output_" + n);
-                    ImageIO.write(img, "jpg", new File("output_" + n));
+                    ImageIO.write(img, "jpg", new File("output_" + n + ".jpg"));
                     System.out.println(String.format("Image saved to %s", target.getAbsolutePath()));
                 } catch (IOException e) {
                     e.printStackTrace();
