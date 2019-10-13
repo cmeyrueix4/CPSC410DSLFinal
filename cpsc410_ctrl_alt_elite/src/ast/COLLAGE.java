@@ -1,5 +1,6 @@
 package ast;
 
+import libs.NameCheckException;
 import mainrun.Main;
 
 import javax.imageio.ImageIO;
@@ -97,7 +98,7 @@ public class COLLAGE extends STATEMENT{
     public void nameCheck() {
         for (String s: photos) {
             if(!Main.variables.containsKey(s)){
-                System.exit(0);
+                throw new NameCheckException(s);
             }
         }
 

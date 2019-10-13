@@ -1,17 +1,14 @@
 package ast;
 
+import libs.NoFileFoundException;
 import mainrun.Main;
 
-import javax.swing.*;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class LOAD extends STATEMENT{
     String dir; 
@@ -45,45 +42,78 @@ public class LOAD extends STATEMENT{
         File folder = new File(dir);
         File[] listOfFiles = folder.listFiles();
 
-        System.out.println("PRINTING THE LIST OF FILES");
+        ArrayList<String> existingFileNames = new ArrayList<>();
         for (File f: listOfFiles) {
-//            System.out.println(f.getAbsoluteFile());
-            System.out.println(f);
+            String name = getFileName(f);
+            existingFileNames.add(name);
+        }
 
-            String name = f.getName();
-            int pos = name.lastIndexOf(".");
-            if (pos > 0) {
-                name = name.substring(0, pos);
-                System.out.println(name);
+        if (!photos.get(0).equals("all")) {
+            for (String declared : photos) {
+                if (!existingFileNames.contains(declared)) {
+                    throw new NoFileFoundException(declared);
+                }
             }
+        }
 
-            try {
-                BufferedImage img = ImageIO.read(f);
-                Main.variables.put(name,img);
-//                System.out.println(img.getWidth());
-//                Main.variables.put()
-//                ImageIcon icon=new ImageIcon(img);
-//                JFrame frame=new JFrame();
-//                frame.setLayout(new FlowLayout());
-//                frame.setSize(500,900);
-//                JLabel lbl=new JLabel();
-//                lbl.setIcon(icon);
-//                frame.add(lbl);
-//                frame.setVisible(true);
-//                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            } catch (IOException e) {
-                e.printStackTrace();
+//        System.out.println("PRINTING THE LIST OF FILES");
+        for (File f: listOfFiles) {
+//            System.out.println(f);
+            String name = getFileName(f);
+
+            if (photos.get(0).equals("all")) {
+                try {
+                    BufferedImage img = ImageIO.read(f);
+                    Main.variables.put(name, img);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+
+                try {
+                    BufferedImage img = ImageIO.read(f);
+                    Main.variables.put(name, img);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
         }
         System.out.println(Main.variables);
 
     }
 
+    private String getFileName(File f) {
+        String name = f.getName();
+        int pos = name.lastIndexOf(".");
+        if (pos > 0) {
+            name = name.substring(0, pos);
+//            System.out.println(name);
+        }
+        return name;
+    }
+
     @Override
     public void nameCheck() {
-        for (String photo: photos) {
-            Main.variables.put(photo, "");
+        if (photos.get(0).equals("all")) {
+            File folder = new File(dir);
+            File[] listOfFiles = folder.listFiles();
+
+            ArrayList<String> existingFileNames = new ArrayList<>();
+            for (File f: listOfFiles) {
+                String name = getFileName(f);
+                existingFileNames.add(name);
+                Main.variables.put(name, "");
+            }
+            System.out.println("Adding all the photos in directory: " + dir);
         }
+        else {
+            for (String photo: photos) {
+                Main.variables.put(photo, "");
+            }
+        }
+
     }
 
     public String getDir(){

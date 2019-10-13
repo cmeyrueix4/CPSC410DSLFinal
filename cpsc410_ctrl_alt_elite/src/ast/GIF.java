@@ -1,6 +1,7 @@
 package ast;
 
 import GifsCollages.GifCreator;
+import libs.NameCheckException;
 import mainrun.Main;
 
 import javax.imageio.ImageIO;
@@ -100,7 +101,7 @@ public class GIF extends STATEMENT{
     public void nameCheck() {
         for (String s: photos) {
             if(!Main.variables.containsKey(s)){
-                System.exit(0);
+                throw new NameCheckException(s);
             }
         }
 
