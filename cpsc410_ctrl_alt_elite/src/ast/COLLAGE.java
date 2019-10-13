@@ -15,6 +15,7 @@ public class COLLAGE extends STATEMENT{
     String name;
     ArrayList<String> photos = new ArrayList<>();
     LOAD loadObject;
+    //List<BufferedImage> imagesToMakeCollageWith = new ArrayList<>();
 
     public COLLAGE(STATEMENT load){
         this.loadObject = (LOAD) load;
@@ -49,15 +50,18 @@ public class COLLAGE extends STATEMENT{
     public void evaluate() {
         if (photos.size() != 5){
         try {
-            BufferedImage img1 = ImageIO.read(new File(photos.get(0)));
-            BufferedImage joinedImg = ImageIO.read(new File(photos.get(0)));
+            String pathNameOfFirstImage = loadObject.getDir() + "\\" + photos.get(0);
+            BufferedImage img1 = ImageIO.read(new File(pathNameOfFirstImage));
+            BufferedImage joinedImg = ImageIO.read(new File(pathNameOfFirstImage));
             for (int k = 1; k < photos.size() - 1; k++){
-                BufferedImage img2 = ImageIO.read(new File(photos.get(k)));
+                String pathNameOfNextImage = loadObject.getDir() + "\\" + photos.get(k);
+                BufferedImage img2 = ImageIO.read(new File(pathNameOfNextImage));
                 joinedImg = joinBufferedImage(img1,img2);
                 img1 = joinedImg;
             }
+            Main.variables.put(name, img1);
             //BufferedImage img2=ImageIO.read(new File(args[1]));
-            boolean success = ImageIO.write(joinedImg, "jpg", new File(photos.get(photos.size() - 1)));
+            //boolean success = ImageIO.write(joinedImg, "jpg", new File(photos.get(photos.size() - 1)));
           //  boolean success = ImageIO.write(joinedImg, "jpg", new File(filename+"joined.jpg"));
             
            // System.out.println("saved success? "+success);
@@ -67,32 +71,41 @@ public class COLLAGE extends STATEMENT{
     }
         else {
             try {
-            BufferedImage topLeftCornerImage = ImageIO.read(new File(photos.get(0)));
-            BufferedImage topRightCornerImage = ImageIO.read(new File(photos.get(1)));
+            String topLeftCornerImagePathName = loadObject.getDir() + "\\" + photos.get(0);
+            String topRightCornerImagePathName = loadObject.getDir() + "\\" + photos.get(1);
+
+            String bottomLeftCornerImagePathName = loadObject.getDir() + "\\" + photos.get(2);
+            String bottomRightCornerImagePathName = loadObject.getDir() + "\\" + photos.get(3);
+            
+            BufferedImage topLeftCornerImage = ImageIO.read(new File(topLeftCornerImagePathName));
+            BufferedImage topRightCornerImage = ImageIO.read(new File(topRightCornerImagePathName));
             BufferedImage topRowPortionOfCollage = 
             joinBufferedImage(topLeftCornerImage, topRightCornerImage);
-   
-            BufferedImage bottomLeftCornerImage = ImageIO.read(new File(photos.get(2)));
-            BufferedImage bottomRightCornerImage = ImageIO.read(new File(photos.get(3)));
+            
+            BufferedImage bottomLeftCornerImage = ImageIO.read(new File(bottomLeftCornerImagePathName));
+            BufferedImage bottomRightCornerImage = ImageIO.read(new File(bottomRightCornerImagePathName));
             BufferedImage bottomRowPortionOfCollage = 
             joinBufferedImage(bottomLeftCornerImage, bottomRightCornerImage);
 
             Graphics2D g = topRowPortionOfCollage.createGraphics();
             g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
             
-            g.drawImage(bottomRowPortionOfCollage, (topRowPortionOfCollage.getWidth() - 
+            g.drawImage(bottomRowPortionOfCollage, (topRowPortionOfCollage.getWidth() -
                 bottomRowPortionOfCollage.getWidth()) / 2,
                 (topRowPortionOfCollage.getHeight() - bottomRowPortionOfCollage.getHeight()) / 2, null);
                 g.dispose();
 
-            display(topRowPortionOfCollage);
-            ImageIO.write(topRowPortionOfCollage, "jpeg", new File(photos.get(4)));
+            Main.variables.put(name, bottomRowPortionOfCollage);
+            display(bottomRowPortionOfCollage);
+
+            //ImageIO.write(topRowPortionOfCollage, "jpeg", new File(photos.get(4)));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
     }
+
 
     @Override
     public void nameCheck() {
@@ -106,7 +119,7 @@ public class COLLAGE extends STATEMENT{
 
     }
 
-    /* This method does what the name says: it joins two images together. The only problem when joining 
+  /* This method does what the name says: it joins two images together. The only problem when joining 
     *  two images is that one image might be way bigger than the other, so the method works as follows:
     *  We come up with an offset, in this case we'll use 5. 
     *  -> We get the overall width that will be needed for the joined image by adding the width of the first
