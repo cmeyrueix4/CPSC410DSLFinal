@@ -71,7 +71,7 @@ public class SAVE extends STATEMENT{
             System.out.println("Gif Creation Failed");
         }
     }
-    }
+    
 
     @Override
     public void nameCheck() {
