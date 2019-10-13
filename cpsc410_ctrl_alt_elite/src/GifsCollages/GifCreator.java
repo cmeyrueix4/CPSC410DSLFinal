@@ -80,7 +80,8 @@ public class GifCreator {
 
     gifWriter.setOutput(outputStream);
 
-    gifWriter.prepareWriteSequence(null);
+    gifWriter.prepareWriteSequence
+            (null);
   }
   
   public void writeToSequence(RenderedImage img) throws IOException {
