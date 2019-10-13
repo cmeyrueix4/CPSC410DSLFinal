@@ -1,5 +1,5 @@
-load from imgs : image13, image2
-filter vignette : image13, image2
-gif create makevideo : image13, image2
-collage create makecombined : image13, image2
+load from imgs : all
+filter vignette : patrick1, patrick2
+gif create makevideo : patrick1, patrick2
+collage create makecombined : patrick1, patrick2
 save : makevideo, makecombined

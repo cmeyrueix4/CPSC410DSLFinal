@@ -6,6 +6,9 @@ import filter.Sharpen;
 import filter.Vignette;
 import org.opencv.core.Mat;
 
+import libs.NameCheckException;
+import mainrun.Main;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +62,15 @@ public class FILTER extends STATEMENT {
         for (ImageFilters f : ImageFilters.values()) {
             if (filterOption.equals(f.tokenName)) {
                 Mat ret = f.filter.process(null);
+            }
+        }
+    }
+
+    @Override
+    public void nameCheck() {
+        for (String s: photos) {
+            if(!Main.variables.containsKey(s)){
+                throw new NameCheckException(s);
             }
         }
     }

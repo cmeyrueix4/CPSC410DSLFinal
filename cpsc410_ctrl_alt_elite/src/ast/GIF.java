@@ -1,14 +1,14 @@
 package ast;
 
-import GifsCollages.GifCreator;
 
-import javax.imageio.ImageIO;
-import javax.imageio.stream.FileImageOutputStream;
-import javax.imageio.stream.ImageOutputStream;
+import GifsCollages.GifCreator;
+import libs.NameCheckException;
+
+import mainrun.Main;
+
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -16,6 +16,8 @@ public class GIF extends STATEMENT{
     String name;
     List<String> photos = new ArrayList<>();
     LOAD loadObject;
+
+    private List<BufferedImage> imagesToMakeGifWith = new ArrayList<>();
 
     public GIF(STATEMENT load){
         this.loadObject = (LOAD) load;
@@ -46,7 +48,7 @@ public class GIF extends STATEMENT{
 
     }
 
-    @Override
+   @Override
     public void evaluate() {
         /* I'm getting the name of the first image from the list of photos we'd like to make a gif out of.
         *  Then I get the name of the directory of that first photo
@@ -55,44 +57,38 @@ public class GIF extends STATEMENT{
         *  Then you read the path name to get a BufferedImage object.
         */
 
-        File firstPhotoFile = new File(photos.get(0));
+       // File firstPhotoFile = new File(photos.get(0));
+
+       for (String photo : photos) {
+           System.out.println(String.format("Trying to use %s", photo));
+           System.out.println(Arrays.toString(Main.variables.keySet().toArray()));
+           System.out.println(Main.variables.get(photo).toString());
+
+           if (Main.variables.get(photo) == "") {
+               throw new RuntimeException("Tried to load a file that does not exist!");
+           }
+
+           BufferedImage nextImage = (BufferedImage) Main.variables.get(photo);
+           imagesToMakeGifWith.add(nextImage);
+
+           Main.variables.put(name, imagesToMakeGifWith);
+       }
+    }
 
 
-        try {
-            String pathNameOfFirstPhoto = firstPhotoFile.getAbsoluteFile().getParent();
-            String fullPathNameOfFirstPhoto = pathNameOfFirstPhoto + photos.get(0);
-            BufferedImage firstImage = null;
-            firstImage = ImageIO.read(new File(fullPathNameOfFirstPhoto));
+    public List<BufferedImage> getGifPhotos(){
+        return this.imagesToMakeGifWith;
+    }
 
-
-            // Setting the name of the output file that will become the gif
-            ImageOutputStream output =
-                    null;
-
-            output = new FileImageOutputStream(new File
-                    ("C:\\Users\\HP USER\\Desktop\\CPSC410DSL\\cpsc410_ctrl_alt_elite\\gifOutput"));
-
-
-            // creating the actual GifCreator object that will make the gif
-            GifCreator writer =
-                    new GifCreator(output, firstImage.getType(), 400, true);
-            writer.writeToSequence(firstImage);
-
-            /* Running a for loop through all the photos we'd like to make a gif of. The steps to do this
-             *  are the same as the steps done to work with the first photo of the gif.
-             */
-            for (int k = 0; k < photos.size(); k++) {
-                File nextPhotoFile = new File(photos.get(k));
-                String pathNameOfNextPhoto = nextPhotoFile.getAbsoluteFile().getParent();
-                String fullPathNameOfNextPhoto = pathNameOfNextPhoto + photos.get(k);
-                BufferedImage secondImage = ImageIO.read(new File(fullPathNameOfNextPhoto));
-                writer.writeToSequence(secondImage);
+    @Override
+    public void nameCheck() {
+        for (String s: photos) {
+            if(!Main.variables.containsKey(s)){
+                throw new NameCheckException(s);
             }
-            writer.close();
-            output.close();
-        } catch (IOException i){
-            System.out.println("Gif Creation Failed");
         }
+
+        Main.variables.put(name, "");
     }
 
 }
