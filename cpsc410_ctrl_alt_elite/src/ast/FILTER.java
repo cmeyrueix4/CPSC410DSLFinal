@@ -6,6 +6,7 @@ package ast;
 //import filter.Vignette;
 //import org.opencv.core.Mat;
 
+import libs.NameCheckException;
 import mainrun.Main;
 
 import java.util.ArrayList;
@@ -69,7 +70,7 @@ public class FILTER extends STATEMENT {
     public void nameCheck() {
         for (String s: photos) {
             if(!Main.variables.containsKey(s)){
-                System.exit(0);
+                throw new NameCheckException(s);
             }
         }
     }

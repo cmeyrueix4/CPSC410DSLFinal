@@ -1,5 +1,6 @@
 package ast;
 
+import libs.NameCheckException;
 import mainrun.Main;
 
 import javax.swing.*;
@@ -93,9 +94,9 @@ public class COLLAGE extends STATEMENT {
 
     @Override
     public void nameCheck() {
-        for (String s : photos) {
-            if (!Main.variables.containsKey(s)) {
-                System.exit(0);
+        for (String s: photos) {
+            if(!Main.variables.containsKey(s)){
+                throw new NameCheckException(s);
             }
         }
 
