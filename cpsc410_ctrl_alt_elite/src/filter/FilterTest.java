@@ -6,10 +6,8 @@ import org.junit.Test;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
-<<<<<<< HEAD
-=======
 import org.opencv.imgcodecs.Imgcodecs;
->>>>>>> 64aafb2ce2358c5a7bf58e8ec01045fb1a01fb68
+
 
 public class FilterTest {
 
@@ -66,9 +64,6 @@ public class FilterTest {
 
 
     }
-<<<<<<< HEAD
-=======
-
     @Test
     public void manualTest() {
         String path = "C:\\Users\\BenH\\Documents\\_ubc\\CPSC410\\";
@@ -92,5 +87,4 @@ public class FilterTest {
         Mat sat = new Contrast().process(img);
         Imgcodecs.imwrite(path + "saturate.jpg", sat);
     }
->>>>>>> 64aafb2ce2358c5a7bf58e8ec01045fb1a01fb68
 }
