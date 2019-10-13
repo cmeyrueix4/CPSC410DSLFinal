@@ -12,7 +12,11 @@ filter_options:
 - brighten
 - darken
 - invert
+<<<<<<< HEAD
 - saturate
+=======
+- contrast
+>>>>>>> 7f5d0a72db8328742d538de12e5e956501336c02
 
 
 ## Example 1
