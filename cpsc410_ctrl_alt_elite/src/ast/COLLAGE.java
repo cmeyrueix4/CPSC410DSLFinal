@@ -119,8 +119,8 @@ public class COLLAGE extends STATEMENT {
         int x = OFFSET;
         int y = OFFSET;
         for (int i = 0; i < images.length; i++) {
-            g2.drawImage(images[i], x, y, null);
-            x += images[i].getWidth() + OFFSET;
+            g2.drawImage(images[i], x, y, imgwidth, imgheight, null);
+            x += imgwidth + OFFSET;
 
             onRow++;
             if (onRow >= imagesPerRow) {

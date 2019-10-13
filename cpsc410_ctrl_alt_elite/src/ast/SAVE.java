@@ -23,8 +23,7 @@ public class SAVE extends STATEMENT {
         tokenizer.getAndCheckNext(":");
 
         if (tokenizer.checkToken("all")) {
-            name = tokenizer.getNext();
-            names.add(name);
+            names.addAll(Main.variables.keySet());
         } else {
             String first = tokenizer.getNext();
             names.add(first);
