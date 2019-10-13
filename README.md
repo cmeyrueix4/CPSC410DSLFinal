@@ -12,7 +12,7 @@ filter_options:
 - brighten
 - darken
 - invert
-- saturate
+- contrast
 
 
 ## Example 1
