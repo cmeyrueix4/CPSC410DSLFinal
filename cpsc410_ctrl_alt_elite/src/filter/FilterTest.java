@@ -6,6 +6,10 @@ import org.junit.Test;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+<<<<<<< HEAD
+=======
+import org.opencv.imgcodecs.Imgcodecs;
+>>>>>>> 64aafb2ce2358c5a7bf58e8ec01045fb1a01fb68
 
 public class FilterTest {
 
@@ -62,4 +66,31 @@ public class FilterTest {
 
 
     }
+<<<<<<< HEAD
+=======
+
+    @Test
+    public void manualTest() {
+        String path = "C:\\Users\\BenH\\Documents\\_ubc\\CPSC410\\";
+        Mat img = Imgcodecs.imread(path + "img.jpg");
+
+        Mat blur = new Blur().process(img);
+        Imgcodecs.imwrite(path + "blurred.jpg", blur);
+
+        Mat sharp = new Sharpen().process(img);
+        Imgcodecs.imwrite(path + "sharp.jpg", sharp);
+
+        Mat invert = new Invert().process(img);
+        Imgcodecs.imwrite(path + "invert.jpg", invert);
+
+        Mat bright = new Brighten().process(img);
+        Imgcodecs.imwrite(path + "bright.jpg", bright);
+
+        Mat dark = new Darken().process(img);
+        Imgcodecs.imwrite(path + "darken.jpg", dark);
+
+        Mat sat = new Contrast().process(img);
+        Imgcodecs.imwrite(path + "saturate.jpg", sat);
+    }
+>>>>>>> 64aafb2ce2358c5a7bf58e8ec01045fb1a01fb68
 }

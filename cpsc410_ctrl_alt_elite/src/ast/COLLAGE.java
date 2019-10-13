@@ -135,7 +135,7 @@ public class COLLAGE extends STATEMENT {
         // You can check out the filters in the following document:
         // https://docs.oracle.com/javase/7/docs/api/java/awt/image/BufferedImage.html
 
-        BufferedImage newImage = new BufferedImage(wid, height, BufferedImage.TYPE_INT_RGB);
+        BufferedImage newImage = new BufferedImage(wid, height, BufferedImage.TYPE_3BYTE_BGR);
         // create the Graphics2D object that will be used to write our images to the output
         Graphics2D g2 = newImage.createGraphics();
 

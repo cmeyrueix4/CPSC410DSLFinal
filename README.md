@@ -19,34 +19,50 @@ filter_options:
 >>>>>>> 7f5d0a72db8328742d538de12e5e956501336c02
 
 
-## Example 1
+## Example 1 Applying filters to images
+```
+load from imgs: dog1, dog2, cat1
+
+filter blur: dog1, cat1
+filter invert: dog2
+
+save: dog1, cat1, dog2
+```
+
+## Example 2 Applying filters to the same image
+```
+load from imgs: dog2
+
+copy dog2 as: d1, d2, d3
+
+filter blur: d1
+filter sharpen: d2
+filter invert: d3
+
+save: d1, d2, d3
+```
+
+## Example 3 Creating a gif
 ```
 load from imgs: all
 
-filter vignette: all
+copy cat1 as: cat1.1
 
-save all
+filter blur: cat1, cat2
+filter sharpen: dog1, cat1.1
+
+gif create catdog: cat1, cat1.1, dog1, cat2
+
+save: catdog
 ```
 
-## Example 2
-```
-load from imgs: all
-
-filter blur: cat1
-filter sharpen: dog1
-
-gif create catdog: cat1, dog1
-
-save catdog
-```
-
-## Example 3
+## Example 4 Creating a collage
 ```
 load from imgs: all
 
 collage create cutecats: cat1, cat2, cat3
 
-save cutecats
+save: cutecats
 ```
 
 # Problem
