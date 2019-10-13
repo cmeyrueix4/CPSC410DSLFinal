@@ -55,8 +55,7 @@ public class FILTER extends STATEMENT {
 
         tokenizer.getAndCheckNext(":");
         if (tokenizer.checkToken("all")) {
-            photo = tokenizer.getNext();
-            photos.add(photo);
+            photos.addAll(Main.variables.keySet());
         } else {
             String first = tokenizer.getNext();
             photos.add(first);
