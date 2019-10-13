@@ -4,6 +4,7 @@ Grammar:
 PROGRAM::- LOAD STATEMENT+ SAVE
 STATEMENT::- [FILTER | GIF | COLLAGE]
 LOAD::- "load" "from" DIR ":" PHOTO+
+COPY::- "copy" PHOTO "as" ":" NAME+  
 FILTER::- "filter" FILTEROP ":" PHOTO+  
 GIF::- "gif" "create" NAME ":" PHOTO+
 COLLAGE::- "collage" "create" NAME ":" PHOTO+
