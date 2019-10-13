@@ -27,6 +27,7 @@ public class Main {
 //        Node.setWriter("C:\\Users\\HP USER\\Desktop\\CPSC410DSL\\cpsc410_ctrl_alt_elite\\gifOutput");
         Node program = new PROGRAM();
         program.parse();
+        program.nameCheck();
         program.evaluate();
 
     }

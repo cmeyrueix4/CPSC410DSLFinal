@@ -1,5 +1,7 @@
 package ast;
 
+import mainrun.Main;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +37,10 @@ public class SAVE extends STATEMENT{
 
     @Override
     public void nameCheck() {
-
+        for (String s: names) {
+            if(!Main.variables.containsKey(s)){
+                System.exit(0);
+            }
+        }
     }
 }

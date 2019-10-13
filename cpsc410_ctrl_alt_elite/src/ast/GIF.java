@@ -1,6 +1,7 @@
 package ast;
 
 import GifsCollages.GifCreator;
+import mainrun.Main;
 
 import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageOutputStream;
@@ -70,8 +71,20 @@ public class GIF extends STATEMENT{
             //output.close();
     }
 
+
     public List<BufferedImage> getGifPhotos(){
         return this.imagesToMakeGifWith;
+    }
+
+    @Override
+    public void nameCheck() {
+        for (String s: photos) {
+            if(!Main.variables.containsKey(s)){
+                System.exit(0);
+            }
+        }
+
+        Main.variables.put(name, "");
     }
 
 }
