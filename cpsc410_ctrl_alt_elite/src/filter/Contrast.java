@@ -2,10 +2,13 @@ package filter;
 
 import org.opencv.core.Mat;
 
-public class Vignette implements Filter {
+public class Contrast implements Filter {
+
     @Override
     public Mat process(Mat inputImage) {
-        return inputImage;
+        Mat output = inputImage.clone();
+        inputImage.convertTo(output, -1, 4, -100);
+        return output;
     }
 
     @Override

@@ -3,6 +3,7 @@ package mainrun;
 import ast.PROGRAM;
 import libs.Node;
 import libs.Tokenizer;
+import org.opencv.core.Core;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -12,10 +13,10 @@ import java.util.Map;
 public class Main {
     public static Map<String, Object> variables = new HashMap<>();
 
-//    static {
-//        // Loads the OpenCV Library
-//        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-//    }
+    static {
+        // Loads the OpenCV Library
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    }
 
     public static void main(String[] args) {
 //        Main.class.getResource("input.txt");
