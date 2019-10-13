@@ -21,19 +21,19 @@ load from imgs: all
 
 filter vignette: all
 
-save all
+save: all
 ```
 
 ## Example 2
 ```
 load from imgs: all
 
-filter blur: cat1
-filter sharpen: dog1
+filter blur: cat1, cat2
+filter sharpen: dog1, dog2
 
-gif create catdog: cat1, dog1
+gif create catdog: cat1, dog1, cat2, dog2
 
-save catdog
+save: catdog
 ```
 
 ## Example 3
@@ -42,7 +42,7 @@ load from imgs: all
 
 collage create cutecats: cat1, cat2, cat3
 
-save cutecats
+save: cutecats
 ```
 
 # Problem
