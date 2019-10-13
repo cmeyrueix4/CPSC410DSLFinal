@@ -28,6 +28,9 @@ public class PROGRAM extends Node {
             else if (tokenizer.checkToken("collage")){
                 s = new COLLAGE(loadS);
             }
+            else if (tokenizer.checkToken("copy")){
+                s = new COPY();
+            }
             s.parse();
             statements.add(s);
         }

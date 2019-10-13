@@ -20,7 +20,7 @@ public class Main {
 
     public static void main(String[] args) {
 //        Main.class.getResource("input.txt");
-        List<String> literals = Arrays.asList("load", ",", "save", "create", "filter", "all", "collage", "from", ":", "gif");
+        List<String> literals = Arrays.asList("load", ",", "save", "create", "filter", "all", "collage", "from", ":", "gif", "as", "copy");
         Tokenizer.makeTokenizer("input.txt",literals);
 //        Tokenizer.makeTokenizer(String.valueOf(Main.class.getResource("../../input.txt")), literals);
 //        Tokenizer.makeTokenizer("/Users/ceylin/Documents/UBC/CPSC/410/CPSC410DSL/cpsc410_ctrl_alt_elite/input.txt",literals);
