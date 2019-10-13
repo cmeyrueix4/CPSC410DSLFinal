@@ -9,10 +9,12 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class COLLAGE extends STATEMENT {
+    public static final int WATERMARK_HEIGHT = 24;
+    public static final int BG_COLOR = 0x424242;
+    public static final int OFFSET = 10;
     String name;
     ArrayList<String> photos = new ArrayList<>();
     LOAD loadObject;
-    //List<BufferedImage> imagesToMakeCollageWith = new ArrayList<>();
 
     public COLLAGE(STATEMENT load) {
         this.loadObject = (LOAD) load;
@@ -44,115 +46,92 @@ public class COLLAGE extends STATEMENT {
 
     @Override
     public void evaluate() {
-//        if (photos.size() != 4) {
-        BufferedImage joined = null;
+        BufferedImage[] imgs = new BufferedImage[photos.size()];
+        int i = 0;
         for (String photoName : photos) {
-            BufferedImage img = (BufferedImage) Main.variables.get(photoName);
-            joined = joinBufferedImage(joined, img);
+            imgs[i] = ((BufferedImage) Main.variables.get(photoName));
+            i++;
         }
 
-        Main.variables.put(name, joined);
-            /*
-        } else {
-            try {
-                String topLeftCornerImagePathName = loadObject.getDir() + "\\" + photos.get(0);
-                String topRightCornerImagePathName = loadObject.getDir() + "\\" + photos.get(1);
-
-                String bottomLeftCornerImagePathName = loadObject.getDir() + "\\" + photos.get(2);
-                String bottomRightCornerImagePathName = loadObject.getDir() + "\\" + photos.get(3);
-
-                BufferedImage topLeftCornerImage = ImageIO.read(new File(topLeftCornerImagePathName));
-                BufferedImage topRightCornerImage = ImageIO.read(new File(topRightCornerImagePathName));
-                BufferedImage topRowPortionOfCollage =
-                        joinBufferedImage(topLeftCornerImage, topRightCornerImage);
-
-                BufferedImage bottomLeftCornerImage = ImageIO.read(new File(bottomLeftCornerImagePathName));
-                BufferedImage bottomRightCornerImage = ImageIO.read(new File(bottomRightCornerImagePathName));
-                BufferedImage bottomRowPortionOfCollage =
-                        joinBufferedImage(bottomLeftCornerImage, bottomRightCornerImage);
-
-                Graphics2D g = topRowPortionOfCollage.createGraphics();
-                g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
-
-                g.drawImage(bottomRowPortionOfCollage, (topRowPortionOfCollage.getWidth() -
-                                bottomRowPortionOfCollage.getWidth()) / 2,
-                        (topRowPortionOfCollage.getHeight() - bottomRowPortionOfCollage.getHeight()) / 2, null);
-                g.dispose();
-
-                Main.variables.put(name, bottomRowPortionOfCollage);
-                display(bottomRowPortionOfCollage);
-
-                //ImageIO.write(topRowPortionOfCollage, "jpeg", new File(photos.get(4)));
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        */
+        BufferedImage collage = makeCollage(imgs);
+        collage = addWatermark(collage);
+        Main.variables.put(name, collage);
     }
 
 
     @Override
     public void nameCheck() {
-        for (String s: photos) {
-            if(!Main.variables.containsKey(s)){
+        for (String s : photos) {
+            if (!Main.variables.containsKey(s)) {
                 throw new NameCheckException(s);
             }
         }
 
         Main.variables.put(name, "");
-
     }
 
-    /* This method does what the name says: it joins two images together. The only problem when joining
-     *  two images is that one image might be way bigger than the other, so the method works as follows:
-     *  We come up with an offset, in this case we'll use 5.
-     *  -> We get the overall width that will be needed for the joined image by adding the width of the first
-     *  image and the width of the second image with the offset.
-     *  -> Then we get the taller of the two images by taking the maximum height of the two images. We then
-     *  add the offset to the maximum height to obtain the overall height that will be used.
-     *  -> Create a new BufferedImage with the width and height we calculated, as well as any filter that
-     *  you want to apply to the image.
-     *  -> We then make a Graphics2D object and initialize it with the new BufferedImage we just made
-     *  -> Initially, the BufferedImage is a blank image of the size we gave it. Then what we'll end
-     *  up doing is writing both images to that output image. This writing is done using the
-     *  Graphics2D object.
-     */
-    public static BufferedImage joinBufferedImage(BufferedImage img1, BufferedImage img2) {
-        if (img1 == null) {
-            return img2;
+    private static BufferedImage addWatermark(BufferedImage collage) {
+        int width = collage.getWidth();
+        int height = collage.getHeight() + WATERMARK_HEIGHT;
+
+        BufferedImage newImage = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+        Graphics2D g2 = newImage.createGraphics();
+        g2.setPaint(new Color(BG_COLOR));
+        g2.drawRect(0, 0, width, height);
+
+        g2.drawImage(collage, 0, 0, null);
+        g2.setPaint(Color.WHITE);
+        g2.setFont(new Font(Font.MONOSPACED, Font.BOLD, 24));
+        g2.drawString("Made with Gif-T Shop", OFFSET, collage.getHeight() + OFFSET);
+
+        return newImage;
+    }
+
+    private static BufferedImage makeCollage(BufferedImage... images) {
+        int width = 0;
+        int height = 0;
+        int imgheight = 0, imgwidth = 0;
+        for (BufferedImage img : images) {
+            imgwidth = Math.max(img.getWidth(), imgwidth);
+            imgheight = Math.max(img.getHeight(), imgheight);
+        }
+        int rows = (int) Math.floor((Math.sqrt(images.length)));
+        int imagesPerRow = images.length / rows;
+
+        if (images.length == 3 || images.length == 5 || images.length == 7) {
+            rows = 1;
+            imagesPerRow = images.length;
         }
 
-        //getting the width and height
-        int offset = 5;
-        int wid = img1.getWidth() + img2.getWidth() + offset;
-        int height = Math.max(img1.getHeight(), img2.getHeight()) + offset;
+        rows = images.length > imagesPerRow * rows ? rows + 1 : rows;
+        height = rows > 1 ? (rows * (imgheight + OFFSET)) + OFFSET : imgheight + (2 * OFFSET);
+        width = OFFSET + ((imgwidth + OFFSET) * imagesPerRow);
 
-        // print("first debug");
-
-        //create a new buffered image that has size width and height. The third parameter can be 
-        // modified to choose whatever filter you want to apply to the output image.
-        // You can check out the filters in the following document:
-        // https://docs.oracle.com/javase/7/docs/api/java/awt/image/BufferedImage.html
-
-        BufferedImage newImage = new BufferedImage(wid, height, BufferedImage.TYPE_3BYTE_BGR);
+        BufferedImage newImage = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
         // create the Graphics2D object that will be used to write our images to the output
         Graphics2D g2 = newImage.createGraphics();
+        g2.setPaint(new Color(BG_COLOR));
+        g2.drawRect(0, 0, width, height);
 
-        //print("second debug");
-        // Color oldColor = g2.getColor();
-        //fill background
-        //  g2.setPaint(Color.WHITE);
-        //  g2.fillRect(0, 0, wid, height);
-        //draw image
-        //  g2.setColor(oldColor);
 
-        // g2, the Graphics2D object, does the joining of the two images here. 
-        g2.drawImage(img1, null, 0, 0);
-        g2.drawImage(img2, null, img1.getWidth() + offset, 0);
+        int onRow = 0;
+
+        int x = OFFSET;
+        int y = OFFSET;
+        for (int i = 0; i < images.length; i++) {
+            g2.drawImage(images[i], x, y, null);
+            x += images[i].getWidth() + OFFSET;
+
+            onRow++;
+            if (onRow >= imagesPerRow) {
+                x = OFFSET;
+                y += imgheight + OFFSET;
+                onRow = 0;
+            }
+        }
+
         g2.dispose();
         return newImage;
-
     }
 
     public static void display(BufferedImage image) {
