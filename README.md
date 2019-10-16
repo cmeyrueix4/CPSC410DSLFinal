@@ -1,6 +1,12 @@
 # CPSC410DSL
 DSL for image manipulation, gif and collage creation. 
 
+# Instructions for Running the Project
+The project uses OpenCV to implement many of the filters which can complicate running the project. You need to download and install OpenCV and then link the OpenCV Java bindings JAR file. You then need to link the native `.dll` executable to this JAR file to compile and run the project.
+
+We followed (this guide)[https://medium.com/@aadimator/how-to-set-up-opencv-in-intellij-idea-6eb103c1d45c] to install opencv with intellij.
+
+**This is much easier to do on a windows system, opencv does not provide pre-compiled code for osx or linux**
 
 # Examples
 ## Environment
