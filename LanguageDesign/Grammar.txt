@@ -1,12 +1,12 @@
-
-Grammar:
-
 PROGRAM::- LOAD STATEMENT+ SAVE
 STATEMENT::- [FILTER | GIF | COLLAGE]
 LOAD::- "load" "from" DIR ":" PHOTO+
 COPY::- "copy" PHOTO ":" NAME+  
-FILTER::- "filter" FILTEROP ":" PHOTO+  
+FILTER::- "filter" FILTEROPTION ":" PHOTO+  
 GIF::- "gif" "create" NAME ":" PHOTO+
 COLLAGE::- "collage" "create" NAME ":" PHOTO+
 SAVE::- "save" NAME
-PHOTOS: string | all
+PHOTO: string | all
+NAME: string
+FILTEROPTION: string
+DIR: string
